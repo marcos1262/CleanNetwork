@@ -10,6 +10,8 @@ import Foundation
 public enum CLURLComponent {
     public static var baseURL = ""
     public static var urlScheme = "https"
+    public static var port: Int? = nil
+    public static var basePath: String = "/"
 }
 
 public struct CLEndpoint {
@@ -32,7 +34,8 @@ public extension CLEndpoint {
         var components = URLComponents()
         components.scheme = CLURLComponent.urlScheme
         components.host = baseURL
-        components.path = "/" + path
+        components.port = CLURLComponent.port
+        components.path = CLURLComponent.basePath + path
         components.queryItems = queryItems
         
         guard let url = components.url else {
